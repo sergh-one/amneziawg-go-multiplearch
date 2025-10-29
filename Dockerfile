@@ -8,7 +8,7 @@ RUN go mod download && \
 FROM alpine:3.19
 ARG AWGTOOLS_RELEASE="1.0.20250901"
 
-RUN apk --no-cache add iproute2 iptables bash && \
+RUN apk --no-cache add iproute2 iptables openresolv bash && \
     cd /usr/bin/ && \
     wget https://github.com/amnezia-vpn/amneziawg-tools/releases/download/v${AWGTOOLS_RELEASE}/alpine-3.19-amneziawg-tools.zip && \
     unzip -j alpine-3.19-amneziawg-tools.zip && \
