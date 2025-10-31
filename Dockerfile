@@ -1,7 +1,13 @@
-FROM golang:1.24.4 as awg
+FROM golang:1.24.4 AS awg
 COPY . /awg
 WORKDIR /awg
-RUN go mod download && \
+ENV CGO_ENABLED=1
+ENV CC=arm-linux-gnueabihf-gcc
+ENV GOOS=linux
+ENV GOARCH=arm
+
+RUN apt-get update && apt-get install -y gcc-arm-linux-gnueabihf && \
+    go mod download && \
     go mod verify && \
     go build -ldflags '-linkmode external -extldflags "-fno-PIC -static"' -v -o /usr/bin
 
