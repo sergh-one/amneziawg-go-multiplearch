@@ -42,10 +42,11 @@ jobs:
           docker buildx build --push \
               --platform linux/arm/v7 \
               -t ghcr.io/sergh-one/awg-go-arm7:latest .
-          
-      - name: build amnezia-wg-docker image for ghcr.io
-        if: ${{ github.ref == 'refs/heads/master' }}
-        run: |
-          docker buildx build --push \
-              --platform linux/arm/v7,linux/arm64,linux/amd64,linux/amd64/v2,linux/amd64/v3 \
-              -t ghcr.io/sergh-one/awg-go-multiplatform:latest .
+      
+      ## this is wrong - only amd64 arch supported by forked repository       
+      # - name: build amnezia-wg-docker image for ghcr.io
+      #   if: ${{ github.ref == 'refs/heads/master' }}
+      #   run: |
+      #     docker buildx build --push \
+      #         --platform linux/arm/v7,linux/arm64,linux/amd64,linux/amd64/v2,linux/amd64/v3 \
+      #         -t ghcr.io/sergh-one/awg-go-multiplatform:latest .
