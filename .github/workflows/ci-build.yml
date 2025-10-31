@@ -36,6 +36,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           
+      - name: build amnezia-wg-docker image for arm7 arch
+        if: ${{ github.ref == 'refs/heads/master' }}
+        run: |
+          docker buildx build --push \
+              --platform linux/arm/v7 \
+              -t ghcr.io/sergh-one/awg-go-arm7:latest .
+          
       - name: build amnezia-wg-docker image for ghcr.io
         if: ${{ github.ref == 'refs/heads/master' }}
         run: |
